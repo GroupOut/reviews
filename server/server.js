@@ -27,7 +27,7 @@ app.get('/deal/:deal_id/reviews', (req, res) => {
 
 // http://localhost:3004/reviews/:review_id/helpful/:updatedHelpfulScore
 // Put endpoint: increases the helpful score by 1 for that specific review
-app.get('/reviews/:review_id/helpful/:updatedHelpfulScore', (req, res) => {
+app.put('/reviews/:review_id/helpful/:updatedHelpfulScore', (req, res) => {
   db.updateHelpful(req.params.review_id, req.params.updatedHelpfulScore, (err, response) => {
     if (err) {
       res.status(304).send(err);
@@ -39,7 +39,7 @@ app.get('/reviews/:review_id/helpful/:updatedHelpfulScore', (req, res) => {
 
 // http:/localhost:3004/reviews/:review_id/relevant/:updatedRelevantScore
 // Put endpoint: increases the relevancy score by 1 point for that specific review
-app.get('/reviews/:review_id/relevant/:updatedRelevantScore', (req, res) => {
+app.put('/reviews/:review_id/relevant/:updatedRelevantScore', (req, res) => {
   db.updateRelevant(req.params.review_id, req.params.updatedRelevantScore, (err, response) => {
     if (err) {
       res.status(304).send(err);
