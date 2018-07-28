@@ -15,17 +15,17 @@ connection.connect((err) => {
   }
 });
 
-// 
-var getReviews = (review, callback) => {
+// works in database
+var getReviews = (deal, callback) => {
   connection.query(`SELECT
     reviews.id, reviews.deals_id, deals.name, users.username, users.reviews_count, users.top_reviewer, reviews.review_score, reviews.review_text, reviews.review_date, reviews.relevancy_score, reviews.helpful_score
     FROM reviews INNER JOIN users ON (reviews.user_id = users.id) INNER JOIN deals ON (reviews.deals_id = deals.id)
-    WHERE reviews.id = ${review};`, (err, data) => {
+    WHERE deals.id = ${deal};`, (err, data) => {
     if (err) {
       callback(err);
       return;
     }
-    callback('WORKING QUERY 1', data);
+    callback(null, data);
   })
 }
 
@@ -36,7 +36,7 @@ var updateHelpful = (review, newHelpfulScore, callback) => {
       callback(err);
       return;
     }
-    callback('WORKING QUERY 2', data);
+    callback(null, data);
   })
 }
 
@@ -47,7 +47,7 @@ var updateRelevant = (review, newRelevantScore, callback) => {
       callback(err);
       return;
     }
-    callback('WORKING QUERY 3', data);
+    callback(null, data);
   })
 }
 
