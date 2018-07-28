@@ -5,7 +5,6 @@ const port = process.env.PORT || 3004;
 
 var db = require('../db/index');
 
-const path = require('path');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
