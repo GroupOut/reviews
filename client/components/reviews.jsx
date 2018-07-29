@@ -1,6 +1,59 @@
 import React from 'react';
 import $ from 'jquery';
 import IndividualReviews from './IndividualReviews.jsx';
+import styled from 'styled-components';
+import StarRatings from 'react-star-ratings';
+
+const ReviewsWrapper = styled.div`
+  float: left;
+  width: 620px;
+  height: 50%;
+  border-style: solid;
+  border-width: 2px;
+  text-align: left;
+  padding: 10px;
+  color: #75787b;
+  font-family: OpenSans, "Helvetica Neue", Helvetica, Tahoma, Arial, FreeSans, sans-serif;            
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+`;
+
+const GreenCircle = styled.div`
+  width:35px;
+  height:35px;
+  color: white;
+  line-height:35px;
+  text-align:center;
+  display:block;
+  float:left;
+  margin-right:22px;
+  background-color: #689F36;
+  border-radius: 50%;
+  font-size: 22px;
+`;
+
+const BannerWrapper = styled.div`
+  background-color: #F6F7F8;
+  padding-top:15px;
+  padding-bottom: 15px;
+  font-size: 12px;
+`;
+
+const ReviewsHeaderTitle = styled.h3`
+  border-bottom: 0.5px solid #75787b;
+  color:#333;
+  font-size:1.4rem;
+  font-weight:700;
+  line-height:1.2;
+  padding-bottom: 20px;
+`;
+
+const NumberOfReviews = styled.span`
+  font-weight:300;
+  line-height:18px;
+  padding-left:10px; 
+`;
 
 class Reviews extends React.Component {
   constructor (props) {
@@ -92,7 +145,7 @@ class Reviews extends React.Component {
 
   render() {
     return (
-      <div>
+      <ReviewsWrapper>
 
         <div className='change reviews'>
           <form onSubmit={this.handleSubmit}>
@@ -105,17 +158,35 @@ class Reviews extends React.Component {
         </div>
 
         <div className='header'>
-          <h2>Customer Reviews</h2>
-          <h4>{this.state.dealAverageScore} AVG SCORE   {this.state.numberOfReviews} Ratings</h4>
-          <p>100% Verified Reviews</p> 
-          <p>All reviews are from people who have redeemed deals with this merchant.</p>
+          <ReviewsHeaderTitle>Customer Reviews</ReviewsHeaderTitle>
+          <h3>
+            <StarRatings
+            rating={Number(this.state.dealAverageScore)}
+            starRatedColor='#F7C24A'
+            numberOfStars={5}
+            starDimension='17px'
+            starSpacing='0px'
+            starEmptyColor='#A5A8AB'
+            isSelectable={false}
+            />
+            <NumberOfReviews>{this.state.numberOfReviews} Ratings</NumberOfReviews>
+          </h3>
+          <BannerWrapper>
+            <GreenCircle>✔</GreenCircle>
+            <div>
+              <span>100% Verified Reviews</span> 
+            </div>
+            <div>
+              <span>All reviews are from people who have redeemed deals with this merchant.</span>
+            </div>
+          </BannerWrapper >
         </div>
 
         <div className='Review bodies'>
           <IndividualReviews reviews={this.state.dealReviews} />
         </div>
 
-      </div>
+      </ReviewsWrapper>
     );
   }
 

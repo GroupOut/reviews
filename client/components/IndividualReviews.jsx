@@ -1,4 +1,68 @@
 import React from 'react';
+import styled from 'styled-components';
+import StarRatings from 'react-star-ratings';
+
+const ReviewTitle = styled.span`
+  font-weight: 600;
+  color: black;
+`;
+
+const Circle = styled.div`
+  width:45px;
+  height:45px;
+  color:#b8b5bb;
+  line-height:45px;
+  text-align:center;
+  display:block;
+  float:left;
+  margin-right:16px;
+  background-color: #E6E7E8;
+  border-radius: 50%;
+`;
+
+const Username = styled.span`
+  width:256px;
+  height:40px;
+  font-size:14px;
+  text-align:left;
+  color:black;
+  font-weight:600;
+`;
+
+const ReviewCount = styled.span`
+  width:256px;
+  height:40px;
+  font-size:14px;
+  text-align:left;
+  color:#75787b;
+  font-weight:600;
+`;
+
+const ReviewDate = styled.span`
+  font-size:14px;
+  color:#75787b;
+`;
+
+const ReviewText = styled.div`
+  position:relative;
+  color: #55585b;
+  font-weight: 300;
+  float:left;
+  padding-top: 7px;
+  padding-bottom: 7px;
+`;
+
+const HelpfulButton = styled.span`
+  border-radius:5px;
+  border:1px solid #b8b5bb;
+  padding:2px 8px;
+  cursor:pointer;
+  color:#75787b;
+  font-size:12px;
+`;
+
+ 
+// HelpfulButton.hover {background-color:#f6f7f8;}
 
 class IndividualReviews extends React.Component {
   constructor(props) {
@@ -7,12 +71,11 @@ class IndividualReviews extends React.Component {
     this.sortReviewsByDate = this.sortReviewsByDate.bind(this);
     this.formatDateToBeSorted = this.formatDateToBeSorted.bind(this);
     this.formatUsername = this.formatUsername.bind(this);
+    this.formatInitials = this.formatInitials.bind(this);
+    this.handleHelpfulClick = this.handleHelpfulClick.bind(this);
     this.state = {
       reviews: {deals_id : 12, helpful_score : 0, id : 7, name : "Full-Day Waterfall Rappelling for One, Two, or Four at North Ridge Mountain Guides", relevancy_score : 0, review_date : "2017-07-09T22:36:49.000Z", review_score : 4, review_text : "Something to start", reviews_count : 17, top_reviewer : 1, username : "Lanie Igonet"},
       visableReviews: [{deals_id : 12, helpful_score : 0, id : 7, name : "Full-Day Waterfall Rappelling for One, Two, or Four at North Ridge Mountain Guides", relevancy_score : 0, review_date : "2017-07-09T22:36:49.000Z", review_score : 4, review_text : "Something to start", reviews_count : 17, top_reviewer : 1, username : "Lanie Igonet"}],
-      // reviewOne: {deals_id : 12, helpful_score : 0, id : 7, name : "Full-Day Waterfall Rappelling for One, Two, or Four at North Ridge Mountain Guides", relevancy_score : 0, review_date : "2017-07-09T22:36:49.000Z", review_score : 4, review_text : "Something to start", reviews_count : 17, top_reviewer : 1, username : "Lanie Igonet"},
-      // reviewTwo: {deals_id : 12, helpful_score : 0, id : 7, name : "Full-Day Waterfall Rappelling for One, Two, or Four at North Ridge Mountain Guides", relevancy_score : 0, review_date : "2017-07-09T22:36:49.000Z", review_score : 4, review_text : "Something to start", reviews_count : 17, top_reviewer : 1, username : "Lanie Igonet"},
-      // reviewThree: {deals_id : 12, helpful_score : 0, id : 7, name : "Full-Day Waterfall Rappelling for One, Two, or Four at North Ridge Mountain Guides", relevancy_score : 0, review_date : "2017-07-09T22:36:49.000Z", review_score : 4, review_text : "Something to start", reviews_count : 17, top_reviewer : 1, username : "Lanie Igonet"},
     }
   }
 
@@ -32,9 +95,6 @@ class IndividualReviews extends React.Component {
         this.setState({
           reviews: nextProps.reviews,
           visableReviews: visableReviews,
-          // reviewOne: nextProps.reviews[0],
-          // reviewTwo: nextProps.reviews[1],
-          // reviewThree: nextProps.reviews[2],
         });
     }
   }
@@ -56,7 +116,6 @@ class IndividualReviews extends React.Component {
   sortReviewsByDate(reviewsArr) {
     var that = this;
     var beforeSort = reviewsArr;
-    console.log('BEFORE SORT', beforeSort);
     var afterSort = reviewsArr.sort(function (a, b) {
       let formattedA = that.formatDateToBeSorted(a.review_date);
       a.sortBy = formattedA
@@ -69,7 +128,6 @@ class IndividualReviews extends React.Component {
     });
   }
 
-
   formatUsername(user) {
     let index = user.indexOf(' ');
     user = user.slice(0, index + 2)
@@ -77,23 +135,48 @@ class IndividualReviews extends React.Component {
     return user;
   }
 
+  formatInitials(user) {
+    let index = user.indexOf(' ');
+    let initials = '';
+    initials = initials.concat(user[0], user[index + 1]);
+    return initials;
+  }
+
+  handleHelpfulClick(){
+    console.log('CLICKED')
+  }
+
   render () {
     return (
       <div>
-        <h3>Relevant Reviews</h3>
+        <ReviewTitle>Relevant Reviews</ReviewTitle>
 
         {this.state.visableReviews.map(review => 
           <div className='firstReview'>
             <div className='firstHeader'>
-              <p>{this.formatUsername(review.username)} {review.reviews_count} reviews</p>
-              <p>{review.review_score} SCORE DATE {review.review_date} </p>
+              <Circle>{this.formatInitials(review.username)}</Circle>
+              <div>
+                <Username>{this.formatUsername(review.username)}</Username> 
+                {review.reviews_count} reviews
+              </div>
+              <div>
+                <StarRatings
+                rating={review.review_score}
+                starRatedColor='#F7C24A'
+                numberOfStars={5}
+                starDimension='14px'
+                starSpacing='0px'
+                starEmptyColor='#A5A8AB'
+                isSelectable={false}
+                />
+                <ReviewDate> DATE {review.review_date} </ReviewDate> 
+              </div>
             </div>
             <div className='firstBody'>
-              <p>{review.review_text}</p>
-              <p> helpfulButton</p>
+              <ReviewText>{review.review_text}</ReviewText>
             </div>
+              <HelpfulButton onClick={this.handleHelpfulClick}>👍 Helpful</HelpfulButton>
           </div>
-
         )}
       </div>
     )
