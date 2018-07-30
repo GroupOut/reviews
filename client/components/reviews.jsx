@@ -31,6 +31,7 @@ const GreenCircle = styled.div`
   background-color: #689F36;
   border-radius: 50%;
   font-size: 22px;
+  margin-left: 10px;
 `;
 
 const BannerWrapper = styled.div`
@@ -100,16 +101,6 @@ class Reviews extends React.Component {
     that.setState({
       dealAverageScore: averageScore,
       numberOfReviews: numberOfReviews,
-    });
-  }
-
-  increaseHelpfulScore(reviewId, currentScore) {
-    $.ajax({
-      url: `/reviews/${reviewId}/helpful/${currentScore}`,
-      type: 'PUT',
-      success: (data) => {
-        console.log('ADD TO HELPFUL SCORE', data)
-      }
     });
   }
 

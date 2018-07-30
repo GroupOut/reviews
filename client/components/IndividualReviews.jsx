@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
+import $ from 'jquery';
 
-const ReviewTitle = styled.span`
+const ReviewTitle = styled.div`
   font-weight: 600;
   color: black;
+  margin-top: 10px;
 `;
 
 const Circle = styled.div`
@@ -36,18 +38,19 @@ const ReviewCount = styled.span`
   text-align:left;
   color:#75787b;
   font-weight:600;
+  margin-left: 8px;
 `;
 
 const ReviewDate = styled.span`
   font-size:14px;
   color:#75787b;
+  margin-left: 8px;
 `;
 
 const ReviewText = styled.div`
   position:relative;
   color: #55585b;
   font-weight: 300;
-  float:left;
   padding-top: 7px;
   padding-bottom: 7px;
 `;
@@ -59,6 +62,16 @@ const HelpfulButton = styled.span`
   cursor:pointer;
   color:#75787b;
   font-size:12px;
+`;
+
+const ReviewWrapper = styled.div`
+  margin: 20px;
+`;
+
+const AllReviews = styled.span`
+  cursor:pointer;
+  color:#689F36;
+  font-weight: 200;
 `;
 
  
@@ -73,6 +86,8 @@ class IndividualReviews extends React.Component {
     this.formatUsername = this.formatUsername.bind(this);
     this.formatInitials = this.formatInitials.bind(this);
     this.handleHelpfulClick = this.handleHelpfulClick.bind(this);
+    this.formatReviewDate = this.formatReviewDate.bind(this);
+    this.increaseHelpfulScore = this.increaseHelpfulScore.bind(this);
     this.state = {
       reviews: {deals_id : 12, helpful_score : 0, id : 7, name : "Full-Day Waterfall Rappelling for One, Two, or Four at North Ridge Mountain Guides", relevancy_score : 0, review_date : "2017-07-09T22:36:49.000Z", review_score : 4, review_text : "Something to start", reviews_count : 17, top_reviewer : 1, username : "Lanie Igonet"},
       visableReviews: [{deals_id : 12, helpful_score : 0, id : 7, name : "Full-Day Waterfall Rappelling for One, Two, or Four at North Ridge Mountain Guides", relevancy_score : 0, review_date : "2017-07-09T22:36:49.000Z", review_score : 4, review_text : "Something to start", reviews_count : 17, top_reviewer : 1, username : "Lanie Igonet"}],
@@ -142,8 +157,36 @@ class IndividualReviews extends React.Component {
     return initials;
   }
 
-  handleHelpfulClick(){
-    console.log('CLICKED')
+  formatReviewDate(date) {
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var year = Number(date.slice(0, 4));
+    var month = Number(date.slice(5, 7));
+    month = months[month];
+    var day = Number(date.slice(8, 10));
+    var date = `${month} ${day}, ${year}`;
+    return date;
+  }
+
+  handleHelpfulClick(review){
+    console.log('CLICKED');
+    console.log('value', review)
+    this.increaseHelpfulScore(review.id, review.helpful_score)
+    // review.helpful_score ++;
+  }
+
+  increaseHelpfulScore(reviewId, currentScore) {
+    $.ajax({
+      url: `/reviews/${reviewId}/helpful/${currentScore}`,
+      type: 'PUT',
+      success: (data) => {
+        console.log('ADD TO HELPFUL SCORE', data)
+      }
+    });
+  }
+
+  strechGoal() {
+    console.log('NOT BUILT YET')
+    window.alert('feature not built yet')
   }
 
   render () {
@@ -152,12 +195,12 @@ class IndividualReviews extends React.Component {
         <ReviewTitle>Relevant Reviews</ReviewTitle>
 
         {this.state.visableReviews.map(review => 
-          <div className='firstReview'>
-            <div className='firstHeader'>
+          <ReviewWrapper className='Review'>
+            <div className='Header'>
               <Circle>{this.formatInitials(review.username)}</Circle>
               <div>
                 <Username>{this.formatUsername(review.username)}</Username> 
-                {review.reviews_count} reviews
+                <ReviewCount>{review.reviews_count} reviews</ReviewCount>
               </div>
               <div>
                 <StarRatings
@@ -169,15 +212,17 @@ class IndividualReviews extends React.Component {
                 starEmptyColor='#A5A8AB'
                 isSelectable={false}
                 />
-                <ReviewDate> DATE {review.review_date} </ReviewDate> 
+                <ReviewDate> {this.formatReviewDate(review.review_date)} </ReviewDate> 
               </div>
             </div>
-            <div className='firstBody'>
+            <div className='Body'>
               <ReviewText>{review.review_text}</ReviewText>
             </div>
-              <HelpfulButton onClick={this.handleHelpfulClick}>👍 Helpful</HelpfulButton>
-          </div>
+              <HelpfulButton onClick={() => this.handleHelpfulClick(review)}>👍 Helpful</HelpfulButton>
+          </ReviewWrapper>
         )}
+
+        <AllReviews onClick={this.strechGoal}>See all reviews</AllReviews>
       </div>
     )
   }
@@ -186,3 +231,5 @@ class IndividualReviews extends React.Component {
 
 
 export default IndividualReviews;
+
+
