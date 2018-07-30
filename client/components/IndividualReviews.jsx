@@ -161,7 +161,7 @@ class IndividualReviews extends React.Component {
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var year = Number(date.slice(0, 4));
     var month = Number(date.slice(5, 7));
-    month = months[month];
+    month = months[month - 1];
     var day = Number(date.slice(8, 10));
     var date = `${month} ${day}, ${year}`;
     return date;
