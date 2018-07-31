@@ -18,6 +18,7 @@ const ReviewsWrapper = styled.div`
   font-weight: 400;
   line-height: 1.5;
 `;
+ReviewsWrapper.displayName = 'ReviewsWrapper';
 
 const GreenCircle = styled.div`
   width:35px;
@@ -33,6 +34,7 @@ const GreenCircle = styled.div`
   font-size: 22px;
   margin-left: 10px;
 `;
+GreenCircle.displayName = 'GreenCircle';
 
 const BannerWrapper = styled.div`
   background-color: #F6F7F8;
@@ -40,6 +42,7 @@ const BannerWrapper = styled.div`
   padding-bottom: 15px;
   font-size: 12px;
 `;
+BannerWrapper.displayName = 'BannerWrapper';
 
 const ReviewsHeaderTitle = styled.h3`
   border-bottom: 0.5px solid #75787b;
@@ -49,12 +52,14 @@ const ReviewsHeaderTitle = styled.h3`
   line-height:1.2;
   padding-bottom: 20px;
 `;
+ReviewsHeaderTitle.displayName = 'ReviewsHeaderTitle';
 
 const NumberOfReviews = styled.span`
   font-weight:300;
   line-height:18px;
   padding-left:10px; 
 `;
+NumberOfReviews.displayName = 'NumberOfReviews';
 
 class Reviews extends React.Component {
   constructor (props) {
