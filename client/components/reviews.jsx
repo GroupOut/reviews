@@ -123,7 +123,7 @@ class Reviews extends React.Component {
     this.setState({ dealNumber: event.target.value });
   }
 
-  handleSubmit(e) {
+  handleSubmit() {
     console.log(`Deal number ${this.state.dealNumber} submitted.`, 'Current states', this.state);
     this.getReviewsForDeal(this.state.dealNumber);
     e.preventDefault();

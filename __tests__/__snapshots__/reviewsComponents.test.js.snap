@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndividualReviews snapshot works correctly 1`] = `
+<div>
+  <ReviewTitle>
+    Relevant Reviews
+  </ReviewTitle>
+  <ReviewWrapper
+    className="Review"
+  >
+    <div
+      className="Header"
+    >
+      <Circle>
+        LI
+      </Circle>
+      <div>
+        <Username>
+          Lanie I.
+        </Username>
+        <ReviewCount>
+          17
+           reviews
+        </ReviewCount>
+      </div>
+      <div>
+        <StarRatings
+          changeRating={null}
+          gradientPathName=""
+          ignoreInlineStyles={false}
+          isSelectable={false}
+          numberOfStars={5}
+          rating={4}
+          starDimension="14px"
+          starEmptyColor="#A5A8AB"
+          starHoverColor="rgb(230, 67, 47)"
+          starRatedColor="#F7C24A"
+          starSpacing="0px"
+          svgIconPath="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+          svgIconViewBox="0 0 51 48"
+          typeOfWidget="Star"
+        />
+        <ReviewDate>
+           
+          July 9, 2017
+           
+        </ReviewDate>
+      </div>
+    </div>
+    <div
+      className="Body"
+    >
+      <ReviewText>
+        Something to start
+      </ReviewText>
+    </div>
+    <HelpfulButton
+      onClick={[Function]}
+    >
+      👍 Helpful
+    </HelpfulButton>
+  </ReviewWrapper>
+  <AllReviews
+    onClick={[Function]}
+  >
+    See all reviews
+  </AllReviews>
+</div>
+`;
+
+exports[`Reviews Snapshot of header 1`] = `
+<div
+  className="header"
+>
+  <ReviewsHeaderTitle>
+    Customer Reviews
+  </ReviewsHeaderTitle>
+  <h3>
+    <StarRatings
+      changeRating={null}
+      gradientPathName=""
+      ignoreInlineStyles={false}
+      isSelectable={false}
+      numberOfStars={5}
+      rating={0}
+      starDimension="17px"
+      starEmptyColor="#A5A8AB"
+      starHoverColor="rgb(230, 67, 47)"
+      starRatedColor="#F7C24A"
+      starSpacing="0px"
+      svgIconPath="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+      svgIconViewBox="0 0 51 48"
+      typeOfWidget="Star"
+    />
+    <NumberOfReviews>
+       Ratings
+    </NumberOfReviews>
+  </h3>
+  <BannerWrapper>
+    <GreenCircle>
+      ✔
+    </GreenCircle>
+    <div>
+      <span>
+        100% Verified Reviews
+      </span>
+    </div>
+    <div>
+      <span>
+        All reviews are from people who have redeemed deals with this merchant.
+      </span>
+    </div>
+  </BannerWrapper>
+</div>
+`;
+
+exports[`Reviews snapshot works correctly 1`] = `
+<ReviewsWrapper>
+  <div
+    className="change reviews"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <label>
+        Change deal:
+        <input
+          onChange={[Function]}
+          type="text"
+        />
+      </label>
+      <input
+        className="submitButton"
+        type="submit"
+        value="Submit"
+      />
+    </form>
+  </div>
+  <div
+    className="header"
+  >
+    <ReviewsHeaderTitle>
+      Customer Reviews
+    </ReviewsHeaderTitle>
+    <h3>
+      <StarRatings
+        changeRating={null}
+        gradientPathName=""
+        ignoreInlineStyles={false}
+        isSelectable={false}
+        numberOfStars={5}
+        rating={0}
+        starDimension="17px"
+        starEmptyColor="#A5A8AB"
+        starHoverColor="rgb(230, 67, 47)"
+        starRatedColor="#F7C24A"
+        starSpacing="0px"
+        svgIconPath="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+        svgIconViewBox="0 0 51 48"
+        typeOfWidget="Star"
+      />
+      <NumberOfReviews>
+         Ratings
+      </NumberOfReviews>
+    </h3>
+    <BannerWrapper>
+      <GreenCircle>
+        ✔
+      </GreenCircle>
+      <div>
+        <span>
+          100% Verified Reviews
+        </span>
+      </div>
+      <div>
+        <span>
+          All reviews are from people who have redeemed deals with this merchant.
+        </span>
+      </div>
+    </BannerWrapper>
+  </div>
+  <div
+    className="Review bodies"
+  >
+    <IndividualReviews
+      reviews={
+        Array [
+          Object {},
+          Object {},
+        ]
+      }
+    />
+  </div>
+</ReviewsWrapper>
+`;
