@@ -8,6 +8,7 @@ const ReviewTitle = styled.div`
   color: black;
   margin-top: 10px;
 `;
+ReviewTitle.displayName = 'ReviewTitle';
 
 const Circle = styled.div`
   width:45px;
@@ -21,6 +22,7 @@ const Circle = styled.div`
   background-color: #E6E7E8;
   border-radius: 50%;
 `;
+Circle.displayName = 'Circle';
 
 const Username = styled.span`
   width:256px;
@@ -30,6 +32,7 @@ const Username = styled.span`
   color:black;
   font-weight:600;
 `;
+Username.displayName = 'Username';
 
 const ReviewCount = styled.span`
   width:256px;
@@ -40,12 +43,14 @@ const ReviewCount = styled.span`
   font-weight:600;
   margin-left: 8px;
 `;
+ReviewCount.displayName = 'ReviewCount';
 
 const ReviewDate = styled.span`
   font-size:14px;
   color:#75787b;
   margin-left: 8px;
 `;
+ReviewDate.displayName = 'ReviewDate';
 
 const ReviewText = styled.div`
   position:relative;
@@ -54,6 +59,7 @@ const ReviewText = styled.div`
   padding-top: 7px;
   padding-bottom: 7px;
 `;
+ReviewText.displayName = 'ReviewText';
 
 const HelpfulButton = styled.span`
   border-radius:5px;
@@ -63,16 +69,19 @@ const HelpfulButton = styled.span`
   color:#75787b;
   font-size:12px;
 `;
+HelpfulButton.displayName = 'HelpfulButton';
 
 const ReviewWrapper = styled.div`
   margin: 20px;
 `;
+ReviewWrapper.displayName = 'ReviewWrapper'
 
 const AllReviews = styled.span`
   cursor:pointer;
   color:#689F36;
   font-weight: 200;
 `;
+AllReviews.displayName = 'AllReviews';
 
  
 // HelpfulButton.hover {background-color:#f6f7f8;}
@@ -161,7 +170,7 @@ class IndividualReviews extends React.Component {
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var year = Number(date.slice(0, 4));
     var month = Number(date.slice(5, 7));
-    month = months[month];
+    month = months[month - 1];
     var day = Number(date.slice(8, 10));
     var date = `${month} ${day}, ${year}`;
     return date;
