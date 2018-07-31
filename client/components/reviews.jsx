@@ -6,7 +6,8 @@ import StarRatings from 'react-star-ratings';
 
 const ReviewsWrapper = styled.div`
   float: left;
-  width: 620px;
+  /*width: 620px;*/
+  max-width: 55%;
   height: 50%;
   border-style: solid;
   border-width: 2px;
@@ -65,8 +66,6 @@ class Reviews extends React.Component {
   constructor (props) {
     super(props)
     
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.calculateDealAverageScore = this.calculateDealAverageScore.bind(this);
     this.state = {
       dealNumber: '',
@@ -78,7 +77,9 @@ class Reviews extends React.Component {
 
   componentWillMount() {
     // make initial get request here to retrieve reviews for specific deal
-    this.getReviewsForDeal(12);
+    let idArr = location.pathname.split('/')[1];
+    console.log('id', idArr);
+    this.getReviewsForDeal(idArr);
   }
 
   getReviewsForDeal(dealId) {
@@ -119,16 +120,16 @@ class Reviews extends React.Component {
     });
   }
 
-  handleChange(event) {
-    this.setState({ dealNumber: event.target.value });
-  }
+  // handleChange(event) {
+  //   this.setState({ dealNumber: event.target.value });
+  // }
 
-  handleSubmit() {
-    console.log(`Deal number ${this.state.dealNumber} submitted.`, 'Current states', this.state);
-    this.getReviewsForDeal(this.state.dealNumber);
-    e.preventDefault();
-    e.target.reset();
-  }
+  // handleSubmit(e) {
+  //   console.log(`Deal number ${this.state.dealNumber} submitted.`, 'Current states', this.state);
+  //   this.getReviewsForDeal(this.state.dealNumber);
+  //   e.preventDefault();
+  //   e.target.reset();
+  // }
 
 // things I see about the groupon reviews section
 //// some padding around the entire thing. Jens thinks 10 px
@@ -143,7 +144,7 @@ class Reviews extends React.Component {
     return (
       <ReviewsWrapper>
 
-        <div className='change reviews'>
+{/*        <div className='change reviews'>
           <form onSubmit={this.handleSubmit}>
             <label>
               Change deal:
@@ -151,7 +152,7 @@ class Reviews extends React.Component {
             </label>
             <input className='submitButton' type="submit" value="Submit" />
           </form>
-        </div>
+        </div>*/}
 
         <div className='header'>
           <ReviewsHeaderTitle>Customer Reviews</ReviewsHeaderTitle>

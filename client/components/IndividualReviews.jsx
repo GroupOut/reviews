@@ -68,11 +68,15 @@ const HelpfulButton = styled.span`
   cursor:pointer;
   color:#75787b;
   font-size:12px;
+  &:hover {
+    background: #E6E7E8;
+  }
 `;
 HelpfulButton.displayName = 'HelpfulButton';
 
 const ReviewWrapper = styled.div`
   margin: 20px;
+
 `;
 ReviewWrapper.displayName = 'ReviewWrapper'
 
@@ -179,7 +183,11 @@ class IndividualReviews extends React.Component {
   handleHelpfulClick(review){
     console.log('CLICKED');
     console.log('value', review)
-    this.increaseHelpfulScore(review.id, review.helpful_score)
+    console.log('review.id', 'review.helpful_score', review.id, review.helpful_score)
+    var id = review.id;
+    var score = review.helpful_score;
+    score++;
+    this.increaseHelpfulScore(id, score)
     // review.helpful_score ++;
   }
 
