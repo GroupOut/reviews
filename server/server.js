@@ -45,6 +45,11 @@ app.get('/deal/:deal_id/reviews', (req, res) => {
   });
 });
 
+//for the proxy
+app.get('app.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/app.js'))
+})
+
 // http://localhost:3004/reviews/:review_id/helpful/:updatedHelpfulScore
 // Put endpoint: increases the helpful score by 1 for that specific review
 app.put('/reviews/:review_id/helpful/:updatedHelpfulScore', (req, res) => {
