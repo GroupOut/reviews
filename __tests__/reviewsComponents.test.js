@@ -30,10 +30,10 @@ describe('Reviews', () => {
     const wrapper = shallow(<Reviews />);
     expect(wrapper.find('.header')).toMatchSnapshot();
   });
-  it('snapshot works correctly', () => {
-    const wrapper = shallow(<Reviews />);
-    expect(wrapper).toMatchSnapshot();
-  })
+  // it('snapshot works correctly', () => {
+  //   const wrapper = shallow(<Reviews />);
+  //   expect(wrapper).toMatchSnapshot();
+  // })
   // it('the ReviewsHeaderTitle should contain the text Customer Reviews', () => {
   //   const wrapper = shallow(<Reviews />);
   //   expect(wrapper.find('ReviewsHeaderTitle').text()).toEqual('Customer Reviews')
