@@ -77,7 +77,7 @@ class Reviews extends React.Component {
 
   componentWillMount() {
     // make initial get request here to retrieve reviews for specific deal
-    let idArr = location.pathname.split('/')[1];
+    let idArr = location.pathname.split('/')[2];
     console.log('id', idArr);
     this.getReviewsForDeal(idArr);
   }
@@ -85,7 +85,7 @@ class Reviews extends React.Component {
   getReviewsForDeal(dealId) {
     let that = this;
     $.ajax({
-      url: `/deal/${dealId}/reviews`,
+      url: `http://localhost:3004/deal/${dealId}/reviews`,
       type: 'GET',
       success: (data) => {
         console.log('REVIEWS DATA', data)
