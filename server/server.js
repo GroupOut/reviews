@@ -28,10 +28,11 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
   next();
 });
 
-app.use('/:something', express.static(path.join(__dirname, '../public/index.html')))
+app.use('/:anythgin/:something', express.static(path.join(__dirname, '../public')))
 // http://localhost:3004/deal/:deal_id/reviews
 // Could also be http://localhost:3004/experience/:deal_id/reviews?sort=id_asc
 // Get endpoint: returns review info for that deal
@@ -46,7 +47,7 @@ app.get('/deal/:deal_id/reviews', (req, res) => {
 });
 
 //for the proxy
-app.get('app.js', (req, res) => {
+app.get('/app.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/app.js'))
 })
 
