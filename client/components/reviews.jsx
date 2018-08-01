@@ -7,10 +7,11 @@ import StarRatings from 'react-star-ratings';
 const ReviewsWrapper = styled.div`
   float: left;
   /*width: 620px;*/
+  margin-left: 125px;
   max-width: 55%;
   height: 50%;
-  border-style: solid;
-  border-width: 2px;
+  /*border-style: solid;
+  border-width: 2px;*/
   text-align: left;
   padding: 10px;
   color: #75787b;
