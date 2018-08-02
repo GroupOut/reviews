@@ -87,6 +87,17 @@ const AllReviews = styled.span`
 `;
 AllReviews.displayName = 'AllReviews';
 
+const TopReviewer = styled.span`
+  background-color: #6057D0;
+  color: white;
+  border-radius: 5px;
+  font-size: 11px;
+  margin-left: 8px;
+  padding: 2px 6px;
+`;
+TopReviewer.displayName = 'TopReviewer';
+
+
  
 // HelpfulButton.hover {background-color:#f6f7f8;}
 
@@ -101,29 +112,37 @@ class IndividualReviews extends React.Component {
     this.handleHelpfulClick = this.handleHelpfulClick.bind(this);
     this.formatReviewDate = this.formatReviewDate.bind(this);
     this.increaseHelpfulScore = this.increaseHelpfulScore.bind(this);
+    this.strechGoal = this.strechGoal.bind(this);
     this.state = {
       reviews: {deals_id : 12, helpful_score : 0, id : 7, name : "Full-Day Waterfall Rappelling for One, Two, or Four at North Ridge Mountain Guides", relevancy_score : 0, review_date : "2017-07-09T22:36:49.000Z", review_score : 4, review_text : "Something to start", reviews_count : 17, top_reviewer : 1, username : "Lanie Igonet"},
-      visableReviews: [{deals_id : 12, helpful_score : 0, id : 7, name : "Full-Day Waterfall Rappelling for One, Two, or Four at North Ridge Mountain Guides", relevancy_score : 0, review_date : "2017-07-09T22:36:49.000Z", review_score : 4, review_text : "Something to start", reviews_count : 17, top_reviewer : 1, username : "Lanie Igonet"}],
+      visableReviews: [{deals_id : 0, helpful_score : 0, id : 0, name : "Sandford Fleming", relevancy_score : 0, review_date : "1970-01-01T00:00:00.000Z", review_score : 0, review_text : "Back in my day we didn't have computer time, so I invented it... Also, this post has no reviews", reviews_count : 0, top_reviewer : 0, username : "Sandford Fleming"}],
+      allReviewsArr: [{deals_id : 0, helpful_score : 0, id : 0, name : "Sandford Fleming", relevancy_score : 0, review_date : "1970-01-01T00:00:00.000Z", review_score : 0, review_text : "Back in my day we didn't have computer time, so I invented it... Also, this post has no reviews", reviews_count : 0, top_reviewer : 0, username : "Sandford Fleming"}],
+      showAllReviews: false,
     }
   }
 
   componentDidMount() {
-    console.log('COMPONENT STATE', this.state)
+
   }
 
   componentWillReceiveProps(nextProps){
     if(nextProps.reviews !== this.props.reviews){
-        this.sortReviewsByDate(nextProps.reviews);
-        var visableReviews = [];
+      this.sortReviewsByDate(nextProps.reviews);
+      var visableReviews = [];
+      var allReviewsArr = [];
+      if(nextProps.reviews.length !== 0) {
         nextProps.reviews.forEach((review, index) => {
           if(index < 3) {
             visableReviews.push(review);
           }
+          allReviewsArr.push(review);
         });
         this.setState({
           reviews: nextProps.reviews,
           visableReviews: visableReviews,
+          allReviewsArr: allReviewsArr,
         });
+      }
     }
   }
 
@@ -181,14 +200,24 @@ class IndividualReviews extends React.Component {
   }
 
   handleHelpfulClick(review){
-    console.log('CLICKED');
-    console.log('value', review)
-    console.log('review.id', 'review.helpful_score', review.id, review.helpful_score)
+    var that = this;
     var id = review.id;
-    var score = review.helpful_score;
-    score++;
-    this.increaseHelpfulScore(id, score)
-    // review.helpful_score ++;
+    $.ajax({
+      url: `/reviews/${id}/helpful`,
+      type: 'GET',
+      success: (data) => {
+        let newScore = data[0].helpful_score;
+        newScore ++;
+        that.increaseHelpfulScore(id, newScore);
+        let reviewsState = this.state.reviews;
+        reviewsState.forEach(review => {
+          if (review.id === id) {
+            review.helpful_score = newScore;
+          }
+        })
+        this.setState({reviews: reviewsState});
+      }
+    });
   }
 
   increaseHelpfulScore(reviewId, currentScore) {
@@ -196,28 +225,58 @@ class IndividualReviews extends React.Component {
       url: `/reviews/${reviewId}/helpful/${currentScore}`,
       type: 'PUT',
       success: (data) => {
-        console.log('ADD TO HELPFUL SCORE', data)
       }
     });
   }
 
-  strechGoal() {
-    console.log('NOT BUILT YET')
-    window.alert('feature not built yet')
+  strechGoal(showReviews) {
+    this.setState({showAllReviews: ! showReviews})
+  }
+
+  topReviewer (review) {
+    if(review.top_reviewer === 1) {
+      return (
+        <TopReviewer>TOP REVIEWER</TopReviewer>
+      )
+    } 
+  };
+
+  helpfulReview (review) {
+    if(review.helpful_score > 4) {
+      return (
+        <TopReviewer>HELPFUL REVIEW</TopReviewer>
+      )
+    }
+  }
+
+  buttonDisplay () {
+    if (this.state.showAllReviews) {
+      return 'See fewer reviews';
+    }
+    return 'See all reviews';
   }
 
   render () {
+    let reviewsToMap
+    if(this.state.showAllReviews) {
+      reviewsToMap = this.state.allReviewsArr
+    } else {
+      reviewsToMap = this.state.visableReviews;
+    }
+
     return (
       <div>
         <ReviewTitle>Relevant Reviews</ReviewTitle>
 
-        {this.state.visableReviews.map(review => 
-          <ReviewWrapper className='Review'>
+        {reviewsToMap.map(review =>
+          <ReviewWrapper className='Review' key={review.id}>
             <div className='Header'>
               <Circle>{this.formatInitials(review.username)}</Circle>
               <div>
                 <Username>{this.formatUsername(review.username)}</Username> 
                 <ReviewCount>{review.reviews_count} reviews</ReviewCount>
+                {this.topReviewer(review)}
+                {this.helpfulReview(review)}
               </div>
               <div>
                 <StarRatings
@@ -239,7 +298,7 @@ class IndividualReviews extends React.Component {
           </ReviewWrapper>
         )}
 
-        <AllReviews onClick={this.strechGoal}>See all reviews</AllReviews>
+        <AllReviews onClick={() => this.strechGoal(this.state.showAllReviews)}>{this.buttonDisplay()}</AllReviews>
       </div>
     )
   }

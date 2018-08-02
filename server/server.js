@@ -51,6 +51,16 @@ app.get('/app.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/app.js'))
 })
 
+
+app.get(`/reviews/:review_id/helpful`, (req, res) => {
+  db.getHelpful(req.params.review_id, (err, response) => {
+    if (err) {
+      res.status(304).send(err);
+    } else  {
+      res.status(200).send(response);
+    }
+  });
+});
 // http://localhost:3004/reviews/:review_id/helpful/:updatedHelpfulScore
 // Put endpoint: increases the helpful score by 1 for that specific review
 app.put('/reviews/:review_id/helpful/:updatedHelpfulScore', (req, res) => {

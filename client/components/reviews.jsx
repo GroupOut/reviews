@@ -88,15 +88,15 @@ class Reviews extends React.Component {
       url: `http://localhost:3004/deal/${dealId}/reviews`,
       type: 'GET',
       success: (data) => {
-        console.log('REVIEWS DATA', data)
-        that.calculateDealAverageScore(data);
-        that.setState({dealReviews: data});
+        if(data.length !== 0) {
+          that.calculateDealAverageScore(data);
+          that.setState({dealReviews: data});   
+        }
       }
     });
   }
 
   calculateDealAverageScore (data) {
-    let that = this;
     var numberOfReviews = 0
     var cumulativeScore = 0
     data.forEach(review => {
@@ -104,7 +104,7 @@ class Reviews extends React.Component {
       numberOfReviews ++;
     });
     var averageScore = cumulativeScore / numberOfReviews;
-    that.setState({
+    this.setState({
       dealAverageScore: averageScore,
       numberOfReviews: numberOfReviews,
     });

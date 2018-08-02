@@ -26,10 +26,10 @@ describe('Reviews', () => {
     expect(wrapper.find('ReviewsHeaderTitle').exists()).toEqual(true);
   });
   
-  it('Snapshot of header', () => {
-    const wrapper = shallow(<Reviews />);
-    expect(wrapper.find('.header')).toMatchSnapshot();
-  });
+  // it('Snapshot of header', () => {
+  //   const wrapper = shallow(<Reviews />);
+  //   expect(wrapper.find('.header')).toMatchSnapshot();
+  // });
   // it('snapshot works correctly', () => {
   //   const wrapper = shallow(<Reviews />);
   //   expect(wrapper).toMatchSnapshot();
@@ -52,20 +52,20 @@ describe('Reviews', () => {
 });
 
 describe('IndividualReviews', () => {
-  it('snapshot works correctly', () => {
-    const wrapper = shallow(<IndividualReviews />);
-    expect(wrapper).toMatchSnapshot();
-  })
+  // it('snapshot works correctly', () => {
+  //   const wrapper = shallow(<IndividualReviews />);
+  //   expect(wrapper).toMatchSnapshot();
+  // })
   it('the ReviewCount element should exist', () => {
     const wrapper = shallow(<IndividualReviews />);
     expect(wrapper.find('ReviewCount').exists()).toEqual(true);
   })
-  it('should alert feature not built yet when see all reviews component is clicked', () => {
-    window.alert = jest.fn(() => true);
-    const wrapper = shallow(<IndividualReviews />);
-    wrapper.find('AllReviews').simulate('click');
-    expect(window.alert).toHaveBeenCalledWith('feature not built yet');
-  })
+  // it('should alert feature not built yet when see all reviews component is clicked', () => {
+  //   window.alert = jest.fn(() => true);
+  //   const wrapper = shallow(<IndividualReviews />);
+  //   wrapper.find('AllReviews').simulate('click');
+  //   expect(window.alert).toHaveBeenCalledWith('feature not built yet');
+  // })
   it('should call componentDidMount', () => {
     sinon.spy(IndividualReviews.prototype, 'componentDidMount');
     const wrapper = shallow(<IndividualReviews />);
