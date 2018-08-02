@@ -7,13 +7,12 @@ import StarRatings from 'react-star-ratings';
 const ReviewsWrapper = styled.div`
   float: left;
   /*width: 620px;*/
-  margin-left: 125px;
-  max-width: 55%;
+  margin-left: 12%;
+  max-width: 85%;
   height: 50%;
   /*border-style: solid;
   border-width: 2px;*/
   text-align: left;
-  padding: 10px;
   color: #75787b;
   font-family: OpenSans, "Helvetica Neue", Helvetica, Tahoma, Arial, FreeSans, sans-serif;            
   font-size: 14px;
