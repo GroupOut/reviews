@@ -7,7 +7,7 @@ import StarRatings from 'react-star-ratings';
 const ReviewsWrapper = styled.div`
   float: left;
   /*width: 620px;*/
-  margin-left: 10%;
+  margin-left: 12%;
   max-width: 85%;
   height: 50%;
   /*border-style: solid;
