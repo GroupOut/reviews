@@ -51,17 +51,20 @@ var updateRelevant = (review, newRelevantScore, callback) => {
   })
 }
 
-
-
-
-
-
-
-
+var getHelpful = (review, callback) => {
+  connection.query(`SELECT reviews.helpful_score FROM reviews WHERE id = ${review}`, (err, data) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    callback(null, data);
+  })
+}
 
 module.exports = {
   // export queries
   getReviews,
   updateHelpful,
-  updateRelevant
+  updateRelevant,
+  getHelpful
 };
