@@ -26,10 +26,10 @@ describe('Reviews', () => {
     expect(wrapper.find('ReviewsHeaderTitle').exists()).toEqual(true);
   });
   
-  it('Snapshot of header', () => {
-    const wrapper = shallow(<Reviews />);
-    expect(wrapper.find('.header')).toMatchSnapshot();
-  });
+  // it('Snapshot of header', () => {
+  //   const wrapper = shallow(<Reviews />);
+  //   expect(wrapper.find('.header')).toMatchSnapshot();
+  // });
   // it('snapshot works correctly', () => {
   //   const wrapper = shallow(<Reviews />);
   //   expect(wrapper).toMatchSnapshot();
