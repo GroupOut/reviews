@@ -250,16 +250,16 @@ class IndividualReviews extends React.Component {
   }
 
   buttonDisplay () {
-    if (this.state.showAllReviews) {
+    if (this.state.showAllReviews && this.state.allReviewsArr.length > this.state.visableReviews.length) {
       return 'See fewer reviews';
     }
     return 'See all reviews';
   }
 
   render () {
-    let reviewsToMap
+    let reviewsToMap; 
     if(this.state.showAllReviews) {
-      reviewsToMap = this.state.allReviewsArr
+      reviewsToMap = this.state.allReviewsArr;
     } else {
       reviewsToMap = this.state.visableReviews;
     }
