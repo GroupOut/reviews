@@ -203,7 +203,7 @@ class IndividualReviews extends React.Component {
     var that = this;
     var id = review.id;
     $.ajax({
-      url: `/reviews/${id}/helpful`,
+      url: `ec2-34-222-46-246.us-west-2.compute.amazonaws.com/reviews/${id}/helpful`,
       type: 'GET', 
       success: (data) => {
         let newScore = data[0].helpful_score;
@@ -222,7 +222,7 @@ class IndividualReviews extends React.Component {
 
   increaseHelpfulScore(reviewId, currentScore) {
     $.ajax({
-      url: `/reviews/${reviewId}/helpful/${currentScore}`,
+      url: `ec2-34-222-46-246.us-west-2.compute.amazonaws.com/reviews/${reviewId}/helpful/${currentScore}`,
       type: 'PUT',
       success: (data) => {
       }
