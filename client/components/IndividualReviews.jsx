@@ -204,7 +204,7 @@ class IndividualReviews extends React.Component {
     var id = review.id;
     $.ajax({
       url: `/reviews/${id}/helpful`,
-      type: 'GET',
+      type: 'GET', 
       success: (data) => {
         let newScore = data[0].helpful_score;
         newScore ++;

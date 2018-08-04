@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3004;
-
+console.log('error before?')
 var db = require('../db/index');
 
 const bodyParser = require('body-parser');
@@ -87,5 +87,5 @@ app.put('/reviews/:review_id/relevant/:updatedRelevantScore', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`server running at: http://localhost:${port}`);
+  console.log(`server running at: port ${port}`);
 });
