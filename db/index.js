@@ -17,6 +17,8 @@ connection.connect((err) => {
 
 // works in database
 var getReviews = (deal, callback) => {
+    console.log('COMPONENT WILL MOUNT GET REQUEST SENT FROM DB QUERY');
+
   connection.query(`SELECT
     reviews.id, reviews.deals_id, deals.name, users.username, users.reviews_count, users.top_reviewer, reviews.review_score, reviews.review_text, reviews.review_date, reviews.relevancy_score, reviews.helpful_score
     FROM reviews INNER JOIN users ON (reviews.user_id = users.id) INNER JOIN deals ON (reviews.deals_id = deals.id)
