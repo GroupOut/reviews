@@ -78,7 +78,7 @@ class Reviews extends React.Component {
   componentWillMount() {
     // make initial get request here to retrieve reviews for specific deal
     let idArr = location.pathname.split('/')[2];
-    console.log('THE idArr', idArr, 'target', idArr[2]);
+    console.log('THE idArr', idArr, 'target', idArr);
     console.log('id', idArr);
     this.getReviewsForDeal(idArr);
   }
@@ -114,7 +114,7 @@ class Reviews extends React.Component {
 
   increaseRelevantScore(reviewId, currentScore) {
     $.ajax({
-      url: `ec2-34-222-46-246.us-west-2.compute.amazonaws.com/reviews/${reviewId}/helpful/${currentScore}`,
+      url: `http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com/reviews/${reviewId}/helpful/${currentScore}`,
       type: 'PUT',
       success: (data) => {
         console.log('ADD TO Relevant SCORE', data)
