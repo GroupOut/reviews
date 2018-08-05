@@ -36,6 +36,8 @@ app.use('/:anythgin/:something', express.static(path.join(__dirname, '../public'
 // http://localhost:3004/deal/:deal_id/reviews
 // Could also be http://localhost:3004/experience/:deal_id/reviews?sort=id_asc
 // Get endpoint: returns review info for that deal
+
+console.log('error before?')
 app.get('/deal/:deal_id/reviews', (req, res) => {
   console.log('COMPONENT WILL MOUNT GET REQUEST SENT FROM SERVER');
   db.getReviews(req.params.deal_id, (err, response) => {
