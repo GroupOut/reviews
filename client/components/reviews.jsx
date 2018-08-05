@@ -94,7 +94,8 @@ class Reviews extends React.Component {
           that.calculateDealAverageScore(data);
           that.setState({dealReviews: data});   
         }
-      }
+      },
+      error: (err) => {console.log(err)};
     });
   }
 
