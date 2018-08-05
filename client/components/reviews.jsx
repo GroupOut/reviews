@@ -87,15 +87,16 @@ class Reviews extends React.Component {
     let that = this;
     console.log('GET REQUEST INITIALIZED');
     $.ajax({
-      url: `http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com/deal/${dealId}/reviews`,
+      url: `http://localhost:3004/deal/${dealId}/reviews`,
       type: 'GET',
       success: (data) => {
+        console.log('DATA RETURNED', data);
         if(data.length !== 0) {
           that.calculateDealAverageScore(data);
           that.setState({dealReviews: data});   
         }
       },
-      error: (err) => {console.log(err)}
+      error: (err) => {console.log('ERROR', err)}
     });
   }
 

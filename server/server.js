@@ -37,11 +37,11 @@ app.use('/:anythgin/:something', express.static(path.join(__dirname, '../public'
 // Could also be http://localhost:3004/experience/:deal_id/reviews?sort=id_asc
 // Get endpoint: returns review info for that deal
 
-console.log('error before?')
-app.get('http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com/deal/:deal_id/reviews', (req, res) => {
+console.log('error before? 2')
+app.get('/deal/:deal_id/reviews', (req, res) => {
   console.log('COMPONENT WILL MOUNT GET REQUEST SENT FROM SERVER');
   db.getReviews(req.params.deal_id, (err, response) => {
-    console.log('RESPONSE', 'ERR', err, "RESPONSE", reponse);
+    console.log('RESPONSE', 'ERR', err, "RESPONSE", response);
     if (err) {
       res.status(304).send(err);
     } else {
