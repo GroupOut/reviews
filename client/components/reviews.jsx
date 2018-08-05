@@ -77,7 +77,8 @@ class Reviews extends React.Component {
 
   componentWillMount() {
     // make initial get request here to retrieve reviews for specific deal
-    let idArr = location.pathname.split('/')[2];
+    let idArr = location.pathname.split('/');
+    console.log('THE idArr', idArr);
     console.log('id', idArr);
     this.getReviewsForDeal(idArr);
   }
