@@ -38,7 +38,7 @@ app.use('/:anythgin/:something', express.static(path.join(__dirname, '../public'
 // Get endpoint: returns review info for that deal
 
 console.log('error before?')
-app.get('/deal/:deal_id/reviews', (req, res) => {
+app.get('http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com/deal/:deal_id/reviews', (req, res) => {
   console.log('COMPONENT WILL MOUNT GET REQUEST SENT FROM SERVER');
   db.getReviews(req.params.deal_id, (err, response) => {
     console.log('RESPONSE', 'ERR', err, "RESPONSE", reponse);
