@@ -95,7 +95,7 @@ class Reviews extends React.Component {
           that.setState({dealReviews: data});   
         }
       },
-      error: (err) => {console.log(err)};
+      error: (err) => {console.log(err)}
     });
   }
 
