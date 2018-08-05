@@ -87,7 +87,7 @@ class Reviews extends React.Component {
     let that = this;
     console.log('GET REQUEST INITIALIZED');
     $.ajax({
-      url: `ec2-34-222-46-246.us-west-2.compute.amazonaws.com/deal/${dealId}/reviews`,
+      url: `http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com/deal/${dealId}/reviews`,
       type: 'GET',
       success: (data) => {
         if(data.length !== 0) {
