@@ -84,6 +84,7 @@ class Reviews extends React.Component {
 
   getReviewsForDeal(dealId) {
     let that = this;
+    console.log('GET REQUEST INITIALIZED');
     $.ajax({
       url: `http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com/deal/${dealId}/reviews`,
       type: 'GET',
