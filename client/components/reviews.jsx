@@ -6,12 +6,9 @@ import StarRatings from 'react-star-ratings';
 
 const ReviewsWrapper = styled.div`
   float: left;
-  /*width: 620px;*/
   margin-left: 12%;
   max-width: 85%;
   height: 50%;
-  /*border-style: solid;
-  border-width: 2px;*/
   text-align: left;
   color: #75787b;
   font-family: OpenSans, "Helvetica Neue", Helvetica, Tahoma, Arial, FreeSans, sans-serif;            
@@ -76,18 +73,14 @@ class Reviews extends React.Component {
   }
 
   componentWillMount() {
-    // make initial get request here to retrieve reviews for specific deal
     let idArr = location.pathname.split('/')[2];
-    console.log('THE idArr', idArr, 'target', idArr);
-    console.log('id', idArr);
     this.getReviewsForDeal(idArr);
   }
 
   getReviewsForDeal(dealId) {
     let that = this;
-    console.log('GET REQUEST INITIALIZED');
     $.ajax({
-      url: `http://localhost:3004/deal/${dealId}/reviews`,
+      url: `http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com:3004/deal/${dealId}/reviews`,
       type: 'GET',
       success: (data) => {
         console.log('DATA RETURNED', data);
@@ -116,7 +109,7 @@ class Reviews extends React.Component {
 
   increaseRelevantScore(reviewId, currentScore) {
     $.ajax({
-      url: `http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com/reviews/${reviewId}/helpful/${currentScore}`,
+      url: `http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com/reviews:3004/${reviewId}/helpful/${currentScore}`,
       type: 'PUT',
       success: (data) => {
         console.log('ADD TO Relevant SCORE', data)
@@ -124,39 +117,9 @@ class Reviews extends React.Component {
     });
   }
 
-  // handleChange(event) {
-  //   this.setState({ dealNumber: event.target.value });
-  // }
-
-  // handleSubmit(e) {
-  //   console.log(`Deal number ${this.state.dealNumber} submitted.`, 'Current states', this.state);
-  //   this.getReviewsForDeal(this.state.dealNumber);
-  //   e.preventDefault();
-  //   e.target.reset();
-  // }
-
-// things I see about the groupon reviews section
-//// some padding around the entire thing. Jens thinks 10 px
-//// header at the top is almost stock minus the stars and number of reviews, which doesn't actually match the review count
-// each review is its own element
-//// each review has additional padding
-//// each review has a header, body with text, and helpful button
-
-// show three reviews 
-
   render() {
     return (
       <ReviewsWrapper>
-
-{/*        <div className='change reviews'>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Change deal:
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-            </label>
-            <input className='submitButton' type="submit" value="Submit" />
-          </form>
-        </div>*/}
 
         <div className='header'>
           <ReviewsHeaderTitle>Customer Reviews</ReviewsHeaderTitle>
