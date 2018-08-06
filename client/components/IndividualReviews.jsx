@@ -97,10 +97,6 @@ const TopReviewer = styled.span`
 `;
 TopReviewer.displayName = 'TopReviewer';
 
-
- 
-// HelpfulButton.hover {background-color:#f6f7f8;}
-
 class IndividualReviews extends React.Component {
   constructor(props) {
     super(props)
@@ -203,7 +199,7 @@ class IndividualReviews extends React.Component {
     var that = this;
     var id = review.id;
     $.ajax({
-      url: `/reviews/${id}/helpful`,
+      url: `http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com:3004/reviews/${id}/helpful`,
       type: 'GET', 
       success: (data) => {
         let newScore = data[0].helpful_score;
@@ -222,7 +218,7 @@ class IndividualReviews extends React.Component {
 
   increaseHelpfulScore(reviewId, currentScore) {
     $.ajax({
-      url: `/reviews/${reviewId}/helpful/${currentScore}`,
+      url: `http://ec2-34-222-46-246.us-west-2.compute.amazonaws.com:3004/reviews/${reviewId}/helpful/${currentScore}`,
       type: 'PUT',
       success: (data) => {
       }

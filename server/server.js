@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3004;
-console.log('error before?')
 var db = require('../db/index');
 
 const bodyParser = require('body-parser');
@@ -36,6 +35,7 @@ app.use('/:anythgin/:something', express.static(path.join(__dirname, '../public'
 // http://localhost:3004/deal/:deal_id/reviews
 // Could also be http://localhost:3004/experience/:deal_id/reviews?sort=id_asc
 // Get endpoint: returns review info for that deal
+
 app.get('/deal/:deal_id/reviews', (req, res) => {
   db.getReviews(req.params.deal_id, (err, response) => {
     if (err) {

@@ -15,8 +15,8 @@
   "scripts": {
     "lint": "eslint '**/*.{js,jsx}' --quiet",
     "format": "prettier --write '**/*.{js,jsx}'",
-    "build": "webpack -d --watch",
-    "start": "nodemon server/server.js",
+    "build": "webpack -d",
+    "start": "node server/server.js",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },

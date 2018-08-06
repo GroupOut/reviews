@@ -1,5 +1,6 @@
 module.exports = {
-  host: process.env.RDS_HOST || 'localhost',
+  host: 'database',
+  port: 3306,
   user: 'root',
   password: '',
   database: 'Customer_Reviews'
